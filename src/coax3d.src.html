@@ -25,6 +25,13 @@ html,body{margin:0;height:100%;background:var(--bg);color:var(--fg);font-family:
 body.rec .ctrl{display:none}
 body.rec .foot{bottom:24px}
 body.rec .gh{display:none}
+.modal{position:fixed;inset:0;background:rgba(1,4,9,.72);display:flex;align-items:center;justify-content:center;z-index:20}
+.modal[hidden]{display:none}
+.modal .box{background:#161b22;border:1px solid var(--line);border-radius:14px;padding:18px 18px 14px;text-align:center;max-width:calc(100vw - 32px)}
+.modal img{display:block;width:300px;max-width:100%;height:auto;border-radius:8px}
+.modal p{margin:12px 0 10px;font-size:14px;color:var(--muted)}
+.modal button{background:#21262d;color:var(--fg);border:1px solid var(--line);border-radius:6px;padding:5px 18px;font-size:14px;cursor:pointer}
+body.rec .modal{display:none}
 .foot a{color:#79c0ff;text-decoration:none} .foot a:hover{text-decoration:underline}
 @media (max-width:760px){
   .title{left:16px;top:14px;max-width:calc(100% - 32px)} .title h1{font-size:19px} .title p{font-size:12px}
@@ -59,12 +66,21 @@ body.rec .gh{display:none}
   <div class="card"><div class="k">A 处能量流 S</div><div class="v" id="r-s" style="color:#ff7a45">→ 1.00</div></div>
 </div>
 
-<div class="foot">切去四分之一仅为便于观察；实际场充满整圈介质　·　λ 已大幅缩短以便同屏显示两个波长<span class="gh">　·　<a href="https://github.com/wangbrightly/coax-traveling-wave-3d" target="_blank" rel="noopener">源码 / 赞赏</a></span></div>
+<div class="foot">切去四分之一仅为便于观察；实际场充满整圈介质　·　λ 已大幅缩短以便同屏显示两个波长<span class="gh">　·　<a href="https://github.com/wangbrightly/coax-traveling-wave-3d" target="_blank" rel="noopener">源码</a></span></div>
 
 <div class="ctrl">
   <button id="play">⏸ 暂停</button>
   <label for="ph">相位</label><input type="range" id="ph" min="0" max="359" value="0">
   <label><input type="checkbox" id="orbit" checked> 自动环绕</label>
+  <button id="reward">☕ 赞赏</button>
+</div>
+
+<div id="rw" class="modal" hidden>
+  <div class="box" role="dialog" aria-label="微信赞赏码">
+    <img src="__REWARD_DATAURI__" alt="微信赞赏码">
+    <p>微信扫码赞赏</p>
+    <button id="rw-close">关闭</button>
+  </div>
 </div>
 
 <script>/*__THREE__*/</script>
@@ -351,6 +367,11 @@ body.rec .gh{display:none}
   var t = 0, playing = true, last = performance.now();
   var playBtn = document.getElementById('play'), phIn = document.getElementById('ph'), orbit = document.getElementById('orbit');
   playBtn.onclick = function(){ playing = !playing; playBtn.textContent = playing ? '⏸ 暂停' : '▶ 播放'; };
+  var rw = document.getElementById('rw');
+  document.getElementById('reward').onclick = function(){ rw.hidden = false; };
+  document.getElementById('rw-close').onclick = function(){ rw.hidden = true; };
+  rw.onclick = function(e){ if (e.target === rw) rw.hidden = true; };
+  window.addEventListener('keydown', function(e){ if (e.key === 'Escape') rw.hidden = true; });
   var swing = 0;
   if (controls) controls.addEventListener('start', function(){ orbit.checked = false; });
   phIn.oninput = function(){ playing = false; playBtn.textContent = '▶ 播放'; t = (+phIn.value/360)*PERIOD; };

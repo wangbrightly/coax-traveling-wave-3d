@@ -48,7 +48,7 @@
 
 ```bash
 # 1. 改源码 src/coax3d.src.html 后打包成单文件
-python3 src/build.py src/coax3d.src.html src/lib/three.min.js src/lib/OrbitControls.js index.html
+python3 src/build.py src/coax3d.src.html src/lib/three.min.js src/lib/OrbitControls.js index.html src/assets/reward-wechat.png
 
 # 2. 逐帧录制（需要 Node.js 和 puppeteer），再用 ffmpeg 合成视频
 npm install puppeteer
@@ -62,7 +62,7 @@ ffmpeg -framerate 30 -i frames/f%04d.png -c:v libx264 -crf 18 -pix_fmt yuv420p -
 
 如果这个动画帮你讲清楚了一件事，欢迎请作者喝杯咖啡 ☕
 
-<!-- 赞赏码 -->
+打开[在线页面](https://wangbrightly.github.io/coax-traveling-wave-3d/)，点右下角「☕ 赞赏」即可看到微信赞赏码。
 
 ## 许可
 
