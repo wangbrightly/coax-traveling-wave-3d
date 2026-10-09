@@ -4,6 +4,8 @@
 
 一个可交互的 Three.js 3D 动画：切开一段同轴电缆，看行波 V(x,t) = V₀·cos(ωt − kx) 推进时，电场、磁场、能量流、电流和电子各自在做什么。
 
+同系列：[屏蔽双绞线版](https://github.com/wangbrightly/stp-traveling-wave-3d)　·　[屏蔽平行线版](https://github.com/wangbrightly/shielded-pair-traveling-wave-3d)
+
 ### [▶ 在线打开（可拖动旋转）](https://wangbrightly.github.io/coax-traveling-wave-3d/)
 
 ![预览](preview.png)
